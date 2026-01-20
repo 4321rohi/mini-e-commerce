@@ -1,6 +1,6 @@
 const express = require("express");
 const dotenv = require("dotenv");
-// const cors = require("cors");
+const cors = require("cors");
 const mongoose = require("mongoose");
 const productsrouter = require("./routes/productsRoutes");
 
@@ -8,11 +8,14 @@ const productsrouter = require("./routes/productsRoutes");
 dotenv.config();
 const app = express();
 
-app.use(express.json());
 
-// app.use(cors({
-//   origin: "http://localhost:5137"
-// }));
+app.use(cors({
+  origin: "http://localhost:5173"
+}));
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 
 
 app.use("/products", productsrouter)

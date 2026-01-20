@@ -1,6 +1,7 @@
 import React from 'react'
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import axios from 'axios';
 import * as yup from "yup";
 import toast, { Toaster } from 'react-hot-toast';
 
@@ -12,18 +13,19 @@ const Form = () => {
       .string()
       .required("Please Enter Name")
       .min(4, "Must be at least 4 characters long")
-      .matches(/^[0-9]*[a-zA-Z][a-zA-Z0-9]*$/
-        , "Name should contain some characters")
+      .matches(
+        /^(?=.*[A-Za-z])[A-Za-z0-9 .,+()/-]+$/,
+        "Invalid Product Name"
+      )
     ,
     price: yup
-      .number()
-      .transform((value) =>
-        isNaN(value) ? undefined : value
-      )
-      .typeError("Price must be a number")
+      .string()
       .required("Price is required")
-      .min(0, "Price must be positive"),
-    category: yup.string().required("Please Enter Category"),
+      .matches(
+        /^(?:0|[1-9]\d*)(?:\.\d{1,2})?$/,
+        "Enter a valid price"
+      )
+    ,
     image: yup
       .mixed()
       .test("required", "Please enter image", (value) => {
@@ -42,16 +44,35 @@ const Form = () => {
   });
   const { errors } = formState;
 
+  const onSubmit = async (data) => {
+    try {
+      const formData = new FormData();
+
+      formData.append("name", data.name);
+      formData.append("price", data.price);
+      formData.append("category", data.category);
+      formData.append("image", data.image[0]); // VERY IMPORTANT
+      const result = await axios.post(
+        "http://localhost:3001/products",
+        formData
+      );
+
+      if (result.status === 201) {
+        toast.success("Submitted Successfully");
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error(error.response?.data?.message || "Something Went Wrong");
+    }
+  };
+
 
 
   return (
     <div>
       <Toaster />
 
-      <form onSubmit={handleSubmit((data) => {
-        console.log(data);
-        toast.success("Product created successfully");
-      })} noValidate>
+      <form onSubmit={handleSubmit(onSubmit)} >
 
         <label htmlFor="name">Name:</label>
         <input {...register("name")} type="text" id="name" placeholder='Product Name' />
