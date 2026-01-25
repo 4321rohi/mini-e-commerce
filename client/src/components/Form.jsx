@@ -52,9 +52,10 @@ const Form = () => {
       formData.append("price", data.price);
       formData.append("category", data.category);
       formData.append("image", data.image[0]); // VERY IMPORTANT
+      // formData.append("image", file);
       const result = await axios.post(
         "http://localhost:3001/products",
-        formData
+        formData,
       );
 
       if (result.status === 201) {

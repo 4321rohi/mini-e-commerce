@@ -8,11 +8,12 @@ const Card = ({ data }) => {
         data && data.map((i) => (
           <div  >
             <ul>
-              <img
+              {/* <img
                 src={`http://localhost:3001/${i.image}`}
                 alt={i.name}
                 className="w-full h-50 object-cover mb-3"
-              />
+              /> */}
+              <img src={i.image} alt={i.name} />
               <li>{i.name}</li>
               <li>{i.price}</li>
               <li>{i.category}</li>
