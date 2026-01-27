@@ -1,12 +1,14 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import axios from 'axios';
 import * as yup from "yup";
 import toast, { Toaster } from 'react-hot-toast';
+import logo from '../assets/logo.png'
 
 
 const Form = () => {
+  const [preview, setPreview] = useState(null);
 
   const schema = yup.object({
     name: yup
@@ -67,45 +69,96 @@ const Form = () => {
     }
   };
 
+  useEffect(() => {
+    return () => {
+      if (preview) {
+        URL.revokeObjectURL(preview);
+      }
+    };
+  }, [preview]);
 
+
+  // [#f0f2f5] width={130}
 
   return (
-    <div>
+    <div className="bg-gray-100 min-h-screen">
+      <div className='py-3  px-4 sm:px-6 flex justify-between items-center border border-b border-gray-300'>
+        <img src={logo} alt="Logo" className="w-24 sm:w-32" />
+        <button className='bg-slate-500
+ text-gray-200 rounded  px-4 py-2 hover:bg-blue-900 cursor-pointer'>Product</button>
+      </div>
+
       <Toaster />
 
-      <form onSubmit={handleSubmit(onSubmit)} >
+      <div className='flex justify-center items-center px-4 py-10'>
 
-        <label htmlFor="name">Name:</label>
-        <input {...register("name")} type="text" id="name" placeholder='Product Name' />
+        <form onSubmit={handleSubmit(onSubmit)} width={100} className="
+    bg-white
+    w-full
+    max-w-md
+    p-6
+    sm:p-8
+    rounded-lg
+    shadow-lg
+    space-y-4
+    transition
+    sm:hover:scale-105
+  ">
+          <h1 className='font-bold text-lg text-center text-gray-800'>Products Form:</h1>
+          <div >
+            {preview && (
+              <div className="flex justify-center">
+                <img
+                  src={preview}
+                  alt="Preview"
+                  className="h-32 w-32 object-cover rounded border"
+                />
+              </div>
+            )}
+            <label htmlFor="name" className="block mb-1 font-medium  text-gray-800">Name:</label>
+            <input {...register("name")} type="text" id="name" placeholder='Product Name' className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-gray-400" />
 
-        <p>{errors.name?.message && errors.name.message}</p>
+            <p className="text-red-500 text-sm">{errors.name?.message && errors.name.message}</p>
 
-        <label htmlFor="price">Price:</label>
-        <input {...register("price")} type="text" id="price" placeholder='Price' />
+            <label htmlFor="price" className="block mb-1 font-medium  text-gray-800">Price:</label>
+            <input {...register("price")} type="text" id="price" placeholder='Price' className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-gray-400" />
 
-        <p>{errors.price?.message && errors.price.message}</p>
+            <p className="text-red-500 text-sm">{errors.price?.message && errors.price.message}</p>
 
-        <label htmlFor="category">Category:</label>
+            <label htmlFor="category" className="block mb-1 font-medium  text-gray-800">Category:</label>
 
-        <select id="category" {...register("category")}>
-          <option value="electronics">Electronics</option>
-          <option value="fashion">Fashion</option>
-          <option value="beauty">Beauty</option>
-          <option value="sports">Sports</option>
-          <option value="furniture">Furniture</option>
-        </select>
+            <select id="category" {...register("category")} className="w-full border border-gray-300 rounded px-3 py-2">
+              <option value="electronics">Electronics</option>
+              <option value="fashion">Fashion</option>
+              <option value="beauty">Beauty</option>
+              <option value="sports">Sports</option>
+              <option value="furniture">Furniture</option>
+            </select>
 
-        <p>{errors.category?.message && errors.category.message}</p>
+            <p>{errors.category?.message && errors.category.message}</p>
 
-        <label htmlFor="image">Image:</label>
-        <input type="file" id="image" {...register("image", {
-          onChange: () => trigger("image"),
-        })} />
+            <label htmlFor="image" className="block mb-1 font-medium  text-gray-800">Image:</label>
+            <input type="file" id="image" {...register("image", {
+              onChange: (e) => {
+                trigger("image")
+                const file = e.target.files[0];
+                if (file) {
+                  setPreview(URL.createObjectURL(file));
+                }
+              }
+            })} className="w-full border border-gray-300 rounded px-3 py-2" />
 
-        <p>{errors.image?.message && errors.image.message}</p>
+            <p className="text-red-500 text-sm">{errors.image?.message && errors.image.message}</p>
 
-        <button>Submit</button>
-      </form >
+            <button className="w-full bg-slate-500
+ text-white py-2.5 rounded hover:bg-blue-900 transition mt-5 cursor-pointer">Submit</button>
+          </div>
+
+        </form >
+
+      </div >
+
+
 
     </div >
   )

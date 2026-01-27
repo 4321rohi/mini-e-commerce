@@ -8,7 +8,7 @@ const storeProducts = async (req, res) => {
       return res.status(400).json({ message: "Image is required" });
     }
 
-    const image = req.file ? req.file.path : null;
+    // const image = req.file ? req.file.path : null;
 
     if (!name || !price || !category) {
       return res.status(400).json({ message: "Missing required fields" });
@@ -20,7 +20,7 @@ const storeProducts = async (req, res) => {
       return res.status(400).json({ message: "Price must be a number" });
     }
 
-    const product = new Product({ name: name, price: parsedPrice, category: category, image: image });
+    const product = new Product({ name: name, price: parsedPrice, category: category, image: `/uploads/${req.file.filename}` });
     await product.save();
     return res.status(201).json({ message: "Product Succesfully added", product })
 

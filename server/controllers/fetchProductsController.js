@@ -9,7 +9,7 @@ const fetchProducts = async (req, res) => {
 
     // 2️⃣ Defaults
     const pageNumber = parseInt(page) || 1;
-    const pageSize = parseInt(limit) || 6;
+    const pageSize = parseInt(limit) || 8;
 
     // 3️⃣ Build filter
     let filter = {};
@@ -26,11 +26,14 @@ const fetchProducts = async (req, res) => {
     let sortOption = {};
 
     if (sort === 'price_asc') {
-      sortOption.price = 1;
-    } else if (sort === 'price_desc') {
       sortOption.price = -1;
-    } else {
-      sortOption.createdAt = -1; // default
+    } else if (sort === 'price_desc') {
+      sortOption.price = 1;
+    } else if (sort === 'Newest_Arrivals') {
+      sortOption.price = -1;
+    }
+    else {
+      sortOption.createdAt = 1; // default
     }
 
     // 5️⃣ Pagination

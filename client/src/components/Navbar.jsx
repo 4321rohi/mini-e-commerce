@@ -82,6 +82,7 @@ import axios from "axios";
 import { CiSearch } from "react-icons/ci";
 import { SearchContext } from "../context/SearchContext";
 import { useContext } from "react";
+import logo from '../assets/logo.png';
 
 const Navbar = () => {
   const debounceRef = useRef(null);
@@ -116,8 +117,8 @@ const Navbar = () => {
           {
             params: {
               search: val,
-              // page: 1,
-              limit: 6, // suggestions limit
+              page: 1,
+              limit: 8, // suggestions limit
             },
           }
         );
@@ -175,27 +176,30 @@ const Navbar = () => {
   }, []);
 
   return (
-    <div className="flex justify-center py-2">
-      <div className="relative w-96">
+    <div className="flex justify-between items-center py-2 bg-gray-100 sm:px-5 px-1">
+      <img src={logo} alt="Logo" className="w-24 sm:w-32" />
+      <div className="relative sm:w-96 ">
 
         {/* SEARCH INPUT */}
-        <div className="flex">
+        <div className="flex ">
           <input
             type="text"
-            placeholder="Search Amazon.in"
+            placeholder="Search..."
             value={search}
             onChange={(e) => handleSearchChange(e.target.value)}
             onKeyDown={handleKeyDown}
-            className="px-4 py-2 border w-full rounded-l-md focus:outline-none"
+            className="sm:px-4 sm:py-2 py-1 px-2  border sm:w-full  w-1/2 rounded-l-md focus:outline-none"
           />
 
           <button
             onClick={handleFinalSearch}
-            className="bg-orange-300 px-4 rounded-r-md flex items-center"
+            className=" bg-gray-400 sm:px-4 px-2 rounded-r-md flex items-center hover:bg-gray-300 cursor-pointer "
           >
             <CiSearch className="text-xl" />
           </button>
         </div>
+
+
 
         {/* SUGGESTIONS */}
         {suggestions.length > 0 && (
@@ -220,7 +224,9 @@ const Navbar = () => {
         )}
 
       </div>
-    </div>
+      <button className=' bg-slate-500
+  text-gray-200 rounded  sm:px-4 sm:py-2 px-1 py-1  sm:hover:bg-stone-500 sm:cursor-pointer'>Form</button>
+    </div >
   );
 };
 

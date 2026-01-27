@@ -59,8 +59,8 @@ const Paginate = ({ page, setPage, totalPages }) => {
 
 
   return (
-    <div className="flex justify-center items-center min-h-5  ">
-      <div className="w-1/3 h-11 bg-gray-100 flex justify-between items-center px-4">
+    <div className="flex justify-center items-center min-h-5 border rounded border-gray-300 px-2">
+      <div className="sm:w-1/3 w-full h-11 bg-gray-100 flex justify-between items-center sm:px-4 px-2 border rounded">
         <button onClick={handlePrev} class="btn">Previous</button>
         {
 
