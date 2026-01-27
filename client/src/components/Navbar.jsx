@@ -83,9 +83,11 @@ import { CiSearch } from "react-icons/ci";
 import { SearchContext } from "../context/SearchContext";
 import { useContext } from "react";
 import logo from '../assets/logo.png';
+import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const debounceRef = useRef(null);
+  const navigate = useNavigate();
 
   const { setSearchQuery } = useContext(SearchContext);
 
@@ -170,18 +172,22 @@ const Navbar = () => {
     }
   };
 
+  const handleClick = () => {
+    navigate("/form")
+  }
+
 
   useEffect(() => {
     return () => clearTimeout(debounceRef.current);
   }, []);
 
   return (
-    <div className="flex justify-between items-center py-2 bg-gray-100 sm:px-5 px-1">
+    <div className="flex justify-between items-center py-2  bg-gray-100 sm:px-5  px-1">
       <img src={logo} alt="Logo" className="w-24 sm:w-32" />
       <div className="relative sm:w-96 ">
 
         {/* SEARCH INPUT */}
-        <div className="flex ">
+        <div className="flex justify-center">
           <input
             type="text"
             placeholder="Search..."
@@ -225,7 +231,7 @@ const Navbar = () => {
 
       </div>
       <button className=' bg-slate-500
-  text-gray-200 rounded  sm:px-4 sm:py-2 px-1 py-1  sm:hover:bg-stone-500 sm:cursor-pointer'>Form</button>
+  text-gray-200 rounded  sm:px-4 sm:py-2 px-1 py-1  sm:hover:bg-blue-900 sm:cursor-pointer' onClick={handleClick}>Form</button>
     </div >
   );
 };

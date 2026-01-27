@@ -61,7 +61,7 @@ const Paginate = ({ page, setPage, totalPages }) => {
   return (
     <div className="flex justify-center items-center min-h-5 border rounded border-gray-300 px-2">
       <div className="sm:w-1/3 w-full h-11 bg-gray-100 flex justify-between items-center sm:px-4 px-2 border rounded">
-        <button onClick={handlePrev} class="btn">Previous</button>
+        <button onClick={handlePrev} className="cursor-pointer hover:border border-b border-b-gray-400">Previous</button>
         {
 
           pages.length < 6 ? (pages.map((i) => (
@@ -111,7 +111,7 @@ const Paginate = ({ page, setPage, totalPages }) => {
 
 
         }
-        <button onClick={handleNext}>Next</button>
+        <button onClick={handleNext} className="cursor-pointer hover:border border-b border-b-gray-400">Next</button>
       </div>
 
     </div >

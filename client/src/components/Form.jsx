@@ -5,10 +5,12 @@ import axios from 'axios';
 import * as yup from "yup";
 import toast, { Toaster } from 'react-hot-toast';
 import logo from '../assets/logo.png'
+import { useNavigate } from 'react-router-dom';
 
 
 const Form = () => {
   const [preview, setPreview] = useState(null);
+  const navigate = useNavigate();
 
   const schema = yup.object({
     name: yup
@@ -77,6 +79,10 @@ const Form = () => {
     };
   }, [preview]);
 
+  const handleClick = () => {
+    navigate("/")
+  }
+
 
   // [#f0f2f5] width={130}
 
@@ -85,7 +91,7 @@ const Form = () => {
       <div className='py-3  px-4 sm:px-6 flex justify-between items-center border border-b border-gray-300'>
         <img src={logo} alt="Logo" className="w-24 sm:w-32" />
         <button className='bg-slate-500
- text-gray-200 rounded  px-4 py-2 hover:bg-blue-900 cursor-pointer'>Product</button>
+ text-gray-200 rounded  px-4 py-2 hover:bg-blue-900 cursor-pointer'onClick={handleClick} >Product</button>
       </div>
 
       <Toaster />

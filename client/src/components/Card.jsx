@@ -8,8 +8,8 @@ const Card = ({ data, loading }) => {
   console.log(loading);
   if (loading) {
     return (
-      <div className="flex justify-center items-center h-60">
-        <p className="text-xl font-semibold text-gray-500 animate-pulse">
+      <div className="flex justify-center items-center min-h-screen">
+        <p className="text-3xl font-bold text-gray-500 animate-pulse">
           Loading...
         </p>
       </div>

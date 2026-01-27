@@ -4,10 +4,11 @@ import Card from './Card';
 import { useContext } from 'react';
 import { SearchContext } from '../context/SearchContext';
 import Paginate from './Paginate';
+import Navbar from './Navbar';
 
 const Sort = () => {
   const { searchQuery } = useContext(SearchContext);
-  const [sort, setSort] = useState("Sort by:Featured");
+  const [sort, setSort] = useState("");
   const [category, setCategory] = useState("");
   const [page, setPage] = useState(1);
   const [data, setData] = useState([]);
@@ -42,6 +43,7 @@ const Sort = () => {
 
   return (
     <div className='flex flex-col' >
+      <Navbar />
       <div className='flex justify-between sm:px-15 py-2 px-2 bg-gray-300'>
         <select onChange={(e) => setSort(e.target.value)} className='border border-gray-500 rounded font-medium cursor-pointer '>
           <option value="">Featured</option>
