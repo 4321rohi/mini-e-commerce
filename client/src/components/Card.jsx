@@ -35,12 +35,13 @@ const Card = ({ data, loading }) => {
         !loading && data && data.map((i) => (
           <div className='w-full border border-gray-400 rounded-md shadow-md bg-gray-100 hover:scale-105 transition-transform cursor-pointer' key={i.id}>
             <ul >
-              <img
+              {/* <img
                 src={`http://localhost:3001${i.image}`}
                 alt={i.name}
                 className="w-full h-50 object-cover mb-3 bg-gray-200 "
-              />
+              /> */}
               {/* <img src={i.image} alt={i.name} className='w-full h-70 object-cover mb-3' /> */}
+              <img src={i.image} alt={product.name} />
               <li className='font-bold text-xl text-gray-600 mb-1'>{i.name}</li>
               <li className='font-bold text-gray-600 text-xl'><MdOutlineCurrencyRupee className='inline' />{i.price}</li>
             </ul>

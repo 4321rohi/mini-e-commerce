@@ -55,11 +55,15 @@ const Form = () => {
       formData.append("name", data.name);
       formData.append("price", data.price);
       formData.append("category", data.category);
-      formData.append("image", data.image[0]); // VERY IMPORTANT
-      // formData.append("image", file);
+      // formData.append("image", data.image[0]); // VERY IMPORTANT
+      formData.append("image", file);
       const result = await axios.post(
         `${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/products`,
-        formData,
+        formData, {
+        headers: {
+          "Content-Type": "multipart/form-data"
+        }
+      }
       );
 
       if (result.status === 201) {
