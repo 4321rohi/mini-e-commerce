@@ -38,14 +38,14 @@ const Card = ({ data, loading }) => {
               <img
                 src={`http://localhost:3001${i.image}`}
                 alt={i.name}
-                className="w-full h-50 object-cover mb-3"
+                className="w-full h-50 object-cover mb-3 bg-gray-200 "
               />
               {/* <img src={i.image} alt={i.name} className='w-full h-70 object-cover mb-3' /> */}
               <li className='font-bold text-xl text-gray-600 mb-1'>{i.name}</li>
               <li className='font-bold text-gray-600 text-xl'><MdOutlineCurrencyRupee className='inline' />{i.price}</li>
             </ul>
             <button className='bg-slate-500
-  text-gray-100 rounded-bl rounded-br px-5 py-2 hover:bg-stone-500 cursor-pointer mt-2 '>Buy</button>
+  text-gray-100 rounded-bl rounded-br px-5 py-2 hover:bg-blue-900 cursor-pointer mt-2 '>Buy</button>
           </div>
 
         ))

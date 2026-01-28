@@ -3,7 +3,7 @@ import { useState } from "react";
 import { SearchContext } from "../context/SearchContext";
 import { useEffect } from "react";
 
-const Paginate = ({ page, setPage, totalPages }) => {
+const Paginate = ({ page, setPage, totalPages, loading }) => {
 
   // const [click, setClick] = useState(1);
   // const [totalPages, setTotalPages] = useState(0);
@@ -59,62 +59,71 @@ const Paginate = ({ page, setPage, totalPages }) => {
 
 
   return (
-    <div className="flex justify-center items-center min-h-5 border rounded border-gray-300 px-2">
-      <div className="sm:w-1/3 w-full h-11 bg-gray-100 flex justify-between items-center sm:px-4 px-2 border rounded">
-        <button onClick={handlePrev} className="cursor-pointer hover:border border-b border-b-gray-400">Previous</button>
-        {
+    <div>
+      {
+        !loading && < div className="flex justify-center items-center min-h-5 border rounded border-gray-300 px-2" >
+          <div className="sm:w-1/3 w-full h-11 bg-gray-100 flex justify-between items-center sm:px-4 px-2 border rounded">
+            <button onClick={handlePrev} className="cursor-pointer hover:border border-b border-b-gray-400">Previous</button>
+            {
 
-          pages.length < 6 ? (pages.map((i) => (
+              pages.length < 6 ? (pages.map((i) => (
 
-            <button className={`${i === page ? "border-black" : "border-gray-300"} border px-3 py-1`}
-              key={i}
-              onClick={() => handleButtonSecondary(i)}
-            >
-              {i}
-            </button>
-          ))) : click <= 3 ? (
-            arr.map((i, idx) => (
-              <button key={idx} onClick={() => handleButton(i)} className={`${i === page ? "border-black" : "border-gray-300"} border px-3 py-1`}
-              >
-                {i}
-              </button>
-            ))
-          ) : click === 4 ? (
+                <button className={`${i === page ? "border-black" : "border-gray-300"} border px-3 py-1`}
+                  key={i}
+                  onClick={() => handleButtonSecondary(i)}
+                >
+                  {i}
+                </button>
+              ))) : click <= 3 ? (
+                arr.map((i, idx) => (
+                  <button key={idx} onClick={() => handleButton(i)} className={`${i === page ? "border-black" : "border-gray-300"} border px-3 py-1`}
+                  >
+                    {i}
+                  </button>
+                ))
+              ) : click === 4 ? (
 
-            brr.map((i, idx) => (
-              <button key={idx} onClick={() => handleButton(i)} className={`${i === page ? "border-black" : "border-gray-300"} border px-3 py-1`}
-              >
-                {i}
-              </button>
-            ))
-          ) : click > 4 && click < totalPages - 2 ? (
-            crr.map((i, idx) => (
-              <button key={idx} onClick={() => handleButton(i)} className={`${i === page ? "border-black" : "border-gray-300"} border px-3 py-1`}
-              >
-                {i}
-              </button>
-
-
-            ))) : (
-
-            drr.map((i, idx) => (
-              <button key={idx} onClick={() => handleButtonSecondary(i)} className={`${i === page ? "border-black" : "border-gray-300"} border px-3 py-1`}
-              >
-                {i}
-              </button>
-            ))
+                brr.map((i, idx) => (
+                  <button key={idx} onClick={() => handleButton(i)} className={`${i === page ? "border-black" : "border-gray-300"} border px-3 py-1`}
+                  >
+                    {i}
+                  </button>
+                ))
+              ) : click > 4 && click < totalPages - 2 ? (
+                crr.map((i, idx) => (
+                  <button key={idx} onClick={() => handleButton(i)} className={`${i === page ? "border-black" : "border-gray-300"} border px-3 py-1`}
+                  >
+                    {i}
+                  </button>
 
 
-          )
+                ))) : (
+
+                drr.map((i, idx) => (
+                  <button key={idx} onClick={() => handleButtonSecondary(i)} className={`${i === page ? "border-black" : "border-gray-300"} border px-3 py-1`}
+                  >
+                    {i}
+                  </button>
+                ))
+
+
+              )
 
 
 
 
-        }
-        <button onClick={handleNext} className="cursor-pointer hover:border border-b border-b-gray-400">Next</button>
-      </div>
+            }
+            <button onClick={handleNext} className="cursor-pointer hover:border border-b border-b-gray-400">Next</button>
+          </div>
 
-    </div >
+        </ div >
+      }
+
+
+    </div>
+
+
+
 
   )
 

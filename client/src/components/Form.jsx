@@ -58,7 +58,7 @@ const Form = () => {
       formData.append("image", data.image[0]); // VERY IMPORTANT
       // formData.append("image", file);
       const result = await axios.post(
-        "http://localhost:3001/products",
+        `${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/products`,
         formData,
       );
 

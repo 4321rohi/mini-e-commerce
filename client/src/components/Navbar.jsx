@@ -115,7 +115,7 @@ const Navbar = () => {
         setLoading(true);
 
         const res = await axios.get(
-          "http://localhost:3001/products",
+          `${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/products`,
           {
             params: {
               search: val,

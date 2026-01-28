@@ -19,7 +19,7 @@ const Sort = () => {
 
     const fetchProduct = async () => {
       try {
-        const res = await axios("http://localhost:3001/products", {
+        const res = await axios(`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/products`, {
           params: {
             search: searchQuery,
             sort,
@@ -42,7 +42,7 @@ const Sort = () => {
   }, [searchQuery, sort, category, page])
 
   return (
-    <div className='flex flex-col' >
+    <div className='flex flex-col ' >
       <Navbar />
       <div className='flex justify-between sm:px-15 py-2 px-2 bg-gray-300'>
         <select onChange={(e) => setSort(e.target.value)} className='border border-gray-500 rounded font-medium cursor-pointer '>
@@ -70,7 +70,7 @@ const Sort = () => {
 
 
       <Card data={data} loading={loading} />
-      <Paginate page={page} setPage={setPage} totalPages={totalPages} />
+      <Paginate page={page} setPage={setPage} totalPages={totalPages} loading={loading} />
     </div >
   )
 }
