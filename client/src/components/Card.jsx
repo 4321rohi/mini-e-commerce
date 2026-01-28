@@ -41,7 +41,7 @@ const Card = ({ data, loading }) => {
                 className="w-full h-50 object-cover mb-3 bg-gray-200 "
               /> */}
               {/* <img src={i.image} alt={i.name} className='w-full h-70 object-cover mb-3' /> */}
-              <img src={i.image} alt={i.name} />
+              <img src={i.image} alt={i.name} className="w-full h-50 object-cover mb-3 bg-gray-200 " />
               <li className='font-bold text-xl text-gray-600 mb-1'>{i.name}</li>
               <li className='font-bold text-gray-600 text-xl'><MdOutlineCurrencyRupee className='inline' />{i.price}</li>
             </ul>
